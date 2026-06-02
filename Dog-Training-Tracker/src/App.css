@@ -1,0 +1,125 @@
+@import url('https://fonts.googleapis.com/css2?family=Cutive+Mono&family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet');
+
+* {
+  box-sizing: border-box;
+  font-family: 'Space Mono', monospace;
+  margin: 0;
+  padding: 0;
+}
+
+h1 {
+  font-family: 'Space Mono', monospace;
+  margin-bottom: 45px;
+}
+
+h2 {
+  font-family: 'Space Mono', monospace;
+}
+
+body {
+  background-color: rgb(203, 170, 130);
+}
+
+header {
+  margin-bottom: 60px;
+  background-image: url("background2.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+.mascot {
+  max-width: 500px;
+  margin-bottom: 40px;
+  border: solid;
+}
+
+.hero {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.greeting {
+  margin-bottom: 30px;
+}
+
+.btns {
+  display: flex;
+  flex-direction: row;
+  gap: 30px;
+  justify-content: center;
+}
+
+.btn {
+color: black;
+background-color: rgb(196, 181, 70);
+padding: 20px;
+font-size: 20px;
+}
+
+.btn-clear {
+  color: black;
+background-color: rgb(196, 181, 70);
+padding: 10px;
+font-size: 15px;
+margin-bottom: 30px;;
+}
+
+.form-start {
+  margin-top: 20px;
+}
+
+form {
+  text-align: left;
+  color: black;
+  margin-left: 20rem;
+}
+
+#pets {
+  margin: 25px;
+  padding: 5px;
+}
+
+#categories {
+  margin: 25px;
+  padding: 5px;
+}
+
+#excellent {
+  margin-bottom: 25px;
+}
+
+#big-win {
+  margin-bottom: 25px;
+}
+
+#message {
+  margin-bottom: 25px;
+}
+
+#submit {
+  padding: 8px;
+  background-color: rgb(196, 181, 70);
+  margin-bottom: 25px;
+  font-size: 20px;
+}
+
+.log-start {
+  margin-top: 20px;
+}
+
+.log-card {
+  display: flex;
+  justify-content: center;
+  text-align: left;
+  font-size: 15px;
+  padding: 30px;
+  border: solid;
+  margin: 50px 400px 50px 400px;
+  color: black;
+  background-color: rgb(115, 168, 85);
+}
+
+
+

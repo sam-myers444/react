@@ -3,6 +3,16 @@ import { useState, useEffect } from 'react';
 
 function App() {
   
+  const [pets, setPets] = useState(() => {
+  const savedPets = localStorage.getItem('pets');
+
+  if (savedPets) {
+    return JSON.parse(savedPets);
+  }
+
+  return ['Maverick', 'Hershey', 'Milo', 'Moose'];
+});
+  const [newPet, setNewPet] = useState('');
   
   const [currentView, setCurrentView] = useState('home');
 
@@ -24,6 +34,11 @@ function App() {
   }
 }, []);
 
+useEffect(() => {
+  localStorage.setItem('pets', JSON.stringify(pets));
+}, [pets]);
+
+
 function clearLog() {
   const confirmed = window.confirm(
     'Are you sure you want to clear all training sessions?'
@@ -39,7 +54,12 @@ function clearLog() {
   function handleSubmit(event) {
   event.preventDefault();
 
-  const newSession = { ...formData };
+  const newSession = { ...formData,
+  date: new Date().toISOString()
+  };
+
+  setSessions([...sessions, newSession]);
+
   const updatedSessions = [...sessions, newSession];
 
   setSessions(updatedSessions);
@@ -48,7 +68,15 @@ function clearLog() {
   'sessions',
   JSON.stringify(updatedSessions)
 );
+}
 
+function addPet(event) {
+  event.preventDefault();
+
+  if (newPet.trim() === '') return;
+
+  setPets([...pets, newPet]);
+  setNewPet('');
 }
 
   return (
@@ -90,15 +118,36 @@ function clearLog() {
         <div>
           <h2 className='form-start'>New Training Session</h2>
             <form onSubmit={handleSubmit}>
+               
+              <input
+                type='text'
+                value={newPet}
+                onChange={(event) =>setNewPet(event.target.value)}
+              />
+
+              <button
+              type='button'
+              onClick={addPet}
+              >
+                Add Pet
+              </button> 
+              
+              <br /> <br />
               <label htmlFor="pets">Choose a pet:</label>
-                <select 
-                value={formData.pet} 
-                onChange={(event) => setFormData({...formData, pet: event.target.value})} name="pet" id="pets">
-                  <option value="Maverick">Maverick</option>
-                  <option value="Hershey">Hershey</option>
-                  <option value="Milo">Milo</option>
-                  <option value="Moose">Moose</option>
-                </select> <br />
+                <select
+                  value={formData.pet}
+                  onChange={(event) =>
+                    setFormData({ ...formData, pet: event.target.value })
+                  }
+                >
+                  {pets.map((pet, index) => (
+                    <option key={index} value={pet}>
+                      {pet}
+                    </option>
+                  ))}
+                </select>
+                  
+                  <br />
               
               <label htmlFor='training category'>Choose a Training Category:</label>
                 <select 
@@ -183,6 +232,7 @@ function clearLog() {
       {sessions.map((session, index) => (
         <div className='log-card' key={index}>
         <p>
+          <strong>📆 Date: {session.date}</strong> <br />
           <strong>🐾 Pet: </strong>{session.pet} <br /> 
           <strong>💪 Confidence: </strong>{session.confidence} <br />
           <strong>🦮 Training Category: </strong>{session.category} <br />
